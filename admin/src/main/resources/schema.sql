@@ -1,8 +1,8 @@
 -- 创建数据库
-CREATE DATABASE IF NOT EXISTS information default charset utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS basic_admin default charset utf8 COLLATE utf8_general_ci;
 
 -- use数据库
-use information;
+use basic_admin;
 
 -- 创建表
 
