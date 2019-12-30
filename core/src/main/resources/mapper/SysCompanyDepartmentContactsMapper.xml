@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.boot.dao.sys.SysCompanyDepartmentContactsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.github.boot.model.sys.SysCompanyDepartmentContacts">
+        <id column="id" property="id" />
+        <result column="create_user" property="createUser" />
+        <result column="create_time" property="createTime" />
+        <result column="contacts" property="contacts" />
+        <result column="contact_number" property="contactNumber" />
+        <result column="types" property="types" />
+        <result column="post_id" property="postId" />
+        <result column="deleted" property="deleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, create_user, create_time, contacts, contact_number, types, post_id, deleted
+    </sql>
+
+</mapper>

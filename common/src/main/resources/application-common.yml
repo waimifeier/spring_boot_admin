@@ -1,0 +1,8 @@
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  output:
+    ansi:
+      enabled: always  # 控制台日志带颜色打印出来

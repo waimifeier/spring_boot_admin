@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.boot.dao.sys.SysUserMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.github.boot.model.sys.SysUser">
+        <id column="id" property="id" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+        <result column="account" property="account" />
+        <result column="password" property="password" />
+        <result column="nick_name" property="nickName" />
+        <result column="phone" property="phone" />
+        <result column="login_time" property="loginTime" />
+        <result column="photo" property="photo" />
+        <result column="sex" property="sex" />
+        <result column="uuid" property="uuid" />
+        <result column="account_type" property="accountType" />
+        <result column="state" property="state" />
+        <result column="subscribe" property="subscribe" />
+        <result column="company_id" property="companyId" />
+        <result column="department_id" property="departmentId" />
+        <result column="position_id" property="positionId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, create_time, create_user, account, password, nick_name, phone, login_time, photo, sex, uuid, account_type, state ,subscribe,company_id,department_id,position_id
+    </sql>
+
+    <!--查询没有分配角色的用户-->
+    <select id="userNotDispatch" resultMap="BaseResultMap">
+        SELECT
+        `USER`.*
+        FROM
+        sys_user AS `USER`
+        <where>
+            `USER`.state != -1 and  `USER`.account_type != 0
+            <if test="nickName!=null and nickName!=''">
+                AND (
+                `USER`.nick_name like CONCAT('%',#{nickName},'%')
+                or `USER`.phone like CONCAT(#{nickName},'%')
+                or`USER`.account like CONCAT('%',#{nickName},'%')
+                )
+            </if>
+            AND NOT EXISTS (
+            SELECT
+            id
+            FROM
+            sys_user_roles
+            WHERE
+            sys_user_id = `USER` .id
+            AND deleted = 0
+            )
+        </where>
+        order by `USER`.create_time desc
+    </select>
+
+    <select id="userNotDispatchCount"  resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM
+        sys_user AS `USER`
+        WHERE
+        `USER`.state != -1 and  `USER`.account_type != 0
+            AND NOT EXISTS (
+            SELECT
+            id
+            FROM
+            sys_user_roles
+            WHERE
+            sys_user_id = `USER` .id
+            AND deleted = 0
+            )
+    </select>
+</mapper>

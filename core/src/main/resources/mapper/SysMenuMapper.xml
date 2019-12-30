@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.boot.dao.sys.SysMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.github.boot.model.sys.SysMenu">
+        <id column="id" property="id" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+        <result column="menu_name" property="menuName" />
+        <result column="menu_route" property="menuRoute" />
+        <result column="menu_type" property="menuType" />
+        <result column="parent_id" property="parentId" />
+        <result column="order_num" property="orderNum" />
+        <result column="icon" property="icon" />
+        <result column="hidden" property="hidden" />
+        <result column="permission_code" property="permissionCode" />
+        <result column="description" property="description" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, create_time, create_user, menu_name, menu_route, menu_type, parent_id, order_num, icon, hidden,permission_code,description
+    </sql>
+
+
+    <!--根据 “用户id” 查找对于的资源菜单-->
+    <select id="selectUserMenuList" resultMap="BaseResultMap">
+        <choose>
+            <when test="userId!=null and userId>0">
+                SELECT
+                <include refid="Base_Column_List"/>
+                FROM
+                sys_menu menu
+                LEFT JOIN sys_roles_menu rm ON rm.sys_menu_id = menu.id
+                LEFT JOIN sys_user_roles ur ON ur.sys_role_id = rm.sys_role_id
+                WHERE
+                AND rm.deleted = 0
+                AND ur.deleted = 0
+                AND menu.hiden = 0
+                AND ur.sys_user_id = 1
+            </when>
+            <otherwise>
+                SELECT <include refid="Base_Column_List"/> FROM sys_menu
+            </otherwise>
+        </choose>
+    </select>
+
+</mapper>

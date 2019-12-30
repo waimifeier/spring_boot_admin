@@ -1,0 +1,29 @@
+# mybatis配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.github.boot.model
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://${mysql.url}:3306/basic_admin?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: ${mysql.username}
+    password: ${mysql.password}
+    initialization-mode: never   # 每次启动总是 执行sql文件
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 300000
+      maximum-pool-size: 12
+      auto-commit: true
+      connection-timeout: 20000
+      max-lifetime: 1200000
+
+#  redis:
+#    database: 1
+#    host: 127.0.0.1
+#    timeout: 3000
+#    jedis:
+#      pool:
+#        max-active: 50
+#        min-idle: 0

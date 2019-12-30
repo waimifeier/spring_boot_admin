@@ -1,0 +1,10 @@
+# 配置日志文件
+logging:
+  level:
+    web: debug
+
+# 开发环境,数据库连接地址
+mysql:
+  url: localhost
+  username: root
+  password: 123456

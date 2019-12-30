@@ -1,0 +1,10 @@
+# 配置日志文件
+logging:
+  level:
+    web: info
+
+# 生产环境,数据库连接地址
+mysql:
+  url: 47.56.68.242
+  username: root
+  password: root
