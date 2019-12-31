@@ -5,6 +5,6 @@ logging:
 
 # 生产环境,数据库连接地址
 mysql:
-  url: 47.56.68.242
+  url: localhost
   username: root
-  password: root
+  password: 123456

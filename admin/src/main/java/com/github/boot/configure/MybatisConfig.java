@@ -3,6 +3,7 @@ package com.github.boot.configure;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -21,11 +22,13 @@ public class MybatisConfig {
         return new PaginationInterceptor();
     }
 
+
     /**
-     * 性能分析插,建议在开发环境开启。
+     * 当前配置环境为dev时候才起作用
      * @return
      */
     @Bean
+    @ConditionalOnProperty(prefix = "spring.profiles", name = "active", havingValue = "dev")
     public PerformanceInterceptor performanceInterceptor() {
         return new PerformanceInterceptor();
     }
