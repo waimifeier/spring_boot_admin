@@ -26,7 +26,9 @@
         <mybatis-plus.version>3.1.0</mybatis-plus.version>
         <commons.io.version>2.5</commons.io.version>
         <commons.lang.version>2.6</commons.lang.version>
+        <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <fastjson.version>1.2.44</fastjson.version>
+        <poi.version>3.17</poi.version>
     </properties>
 
     <dependencyManagement>
@@ -69,9 +71,31 @@
                 <version>${commons.lang.version}</version>
             </dependency>
             <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+
+          <!--  <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-scratchpad</artifactId>
+                <version>${poi.version}</version>
+            </dependency>-->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

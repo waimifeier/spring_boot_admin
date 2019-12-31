@@ -11,5 +11,4 @@ public class ConstantQueryParams {
     // 前端传过来的分页字段 -- 当前页
     public static final String PAGE_NUM="pageNum";
 
-
 }
