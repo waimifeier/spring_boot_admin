@@ -23,8 +23,11 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Arrays.asList;
 
 @Transactional(readOnly = true)
 @Service
@@ -189,7 +192,9 @@ public class CoreOrganizationalServiceImpl implements CoreOrganizationalService 
 
         Integer useDepartmentCount = sysUserService.count(
                 new LambdaQueryWrapper<SysUser>()
-                        .in(SysUser::getDepartmentId, sysDepartmentService.departmentNodeIds(null, CollectionUtil.newArrayList(departmentId)))
+                        .in(SysUser::getDepartmentId, sysDepartmentService.departmentNodeIds(
+                                null, CollectionUtil.newArrayList(departmentId))
+                        )
         );
 
         if(useDepartmentCount > 0 ) return EnumDepartment.OrganizeType.POSITION.getKey();
@@ -210,7 +215,7 @@ public class CoreOrganizationalServiceImpl implements CoreOrganizationalService 
         );
 
         if( childCompanyCount > 0 ){
-            return Arrays.asList(EnumDepartment.OrganizeType.COMPANY.getKey());
+            return Collections.singletonList(EnumDepartment.OrganizeType.COMPANY.getKey());
         }
 
         Integer childDeptCount = sysDepartmentService.count(
@@ -219,12 +224,13 @@ public class CoreOrganizationalServiceImpl implements CoreOrganizationalService 
                         .eq(SysDepartment::getCompanyId, companyId)
         );
 
-        if(childDeptCount<=0)
-            return Arrays.asList(
+        if(childDeptCount<=0) {
+            return asList(
                     EnumDepartment.OrganizeType.COMPANY.getKey(),
                     EnumDepartment.OrganizeType.DEPARTMENT.getKey()
             );
-        return Arrays.asList(EnumDepartment.OrganizeType.DEPARTMENT.getKey());
+        }
+        return Collections.singletonList(EnumDepartment.OrganizeType.DEPARTMENT.getKey());
     }
 
 

@@ -1,6 +1,7 @@
 package com.github.boot.controller.sys;
 
 import com.github.boot.annotation.LoginUser;
+import com.github.boot.annotation.SysLog;
 import com.github.boot.beans.common.JSONReturn;
 import com.github.boot.beans.request.sys.RoleUserMappingParams;
 import com.github.boot.beans.request.sys.SysUserParams;
@@ -44,6 +45,7 @@ public class SysUserController {
      * @return
      */
     @RequestMapping("/save")
+    @SysLog("保存用户")
     public JSONReturn saveUser(@LoginUser SysUser sysUser , @RequestBody @Validated SysUserParams params) {
         userService.saveUser(sysUser,params);
         return JSONReturn.buildSuccessEmptyBody();
@@ -56,6 +58,7 @@ public class SysUserController {
      * @return
      */
     @RequestMapping("/modify")
+    @SysLog("修改用户")
     public JSONReturn modifyUser(@LoginUser SysUser sysUser , @RequestBody @Validated SysUserParams params) {
         userService.modifyUser(sysUser,params);
         return JSONReturn.buildSuccessEmptyBody();
@@ -67,6 +70,7 @@ public class SysUserController {
      * @return
      */
     @RequestMapping("/list")
+    @SysLog("获取用户列表")
     public JSONReturn userList( @RequestBody HashMap<String,Object> params) {
 
         return JSONReturn.buildSuccess(userService.userList(params));
@@ -78,6 +82,7 @@ public class SysUserController {
      * @return
      */
     @RequestMapping("/disabled/{userId:\\d+}")
+    @SysLog("禁用启用用户")
     public JSONReturn disabledUser(@PathVariable("userId") Long id) {
         userService.disabledUser(id);
         return JSONReturn.buildSuccessEmptyBody();
@@ -89,6 +94,7 @@ public class SysUserController {
      * @return
      */
     @RequestMapping("/remove/{userId:\\d+}")
+    @SysLog("删除用户")
     public JSONReturn removeUser(@PathVariable("userId") Long id) {
         userService.removeUser(id);
         return JSONReturn.buildSuccessEmptyBody();
@@ -100,6 +106,7 @@ public class SysUserController {
      * @return
      */
     @RequestMapping("/role_mapping")
+    @SysLog("分配角色")
     public JSONReturn roleMapping(@RequestBody @Validated RoleUserMappingParams params) {
         userService.roleMapping(params);
         return JSONReturn.buildSuccessEmptyBody();

@@ -13,11 +13,11 @@ spring:
     initialization-mode: never   # 每次启动总是 执行sql文件
     hikari:
       minimum-idle: 5
-      idle-timeout: 300000
-      maximum-pool-size: 12
-      auto-commit: true
-      connection-timeout: 20000
-      max-lifetime: 1200000
+      maximum-pool-size: 15
+      connection-test-query: select 1
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      pool-name: FebsHikariCP
 
 #  redis:
 #    database: 1
