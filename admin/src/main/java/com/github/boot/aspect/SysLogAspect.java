@@ -76,7 +76,11 @@ public class SysLogAspect {
 		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 
 		String ip = IPUtils.getIpAddr(request);
-		log.info("请求 ip:{}",ip);
+		log.info("请求ip: {}",ip);
 		log.info("耗时：{} ms",time);
+		log.info("当前站点：{} ", HttpContextUtils.getDomain());
+		log.info("请求站点: {} ", HttpContextUtils.getOrigin());
+		log.info("请求路径: {}", HttpContextUtils.getRequestUrl());
+
 	}
 }

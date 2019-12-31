@@ -1,5 +1,6 @@
 package com.github.boot.controller.sys;
 
+import com.github.boot.annotation.SysLog;
 import com.github.boot.beans.common.JSONReturn;
 import com.github.boot.beans.request.sys.EditorRolesParams;
 import com.github.boot.service.sys.RoleService;
@@ -75,6 +76,7 @@ public class SysRolesController {
      * @return
      */
     @RequestMapping("/info/{id:\\d+}")
+    @SysLog("获取角色详情")
     public JSONReturn roleInfo(@PathVariable Long id){
         return JSONReturn.buildSuccess(roleService.roleInfo(id));
     }

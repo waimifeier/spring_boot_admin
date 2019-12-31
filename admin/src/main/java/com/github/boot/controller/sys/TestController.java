@@ -1,13 +1,12 @@
 package com.github.boot.controller.sys;
 
+import com.github.boot.annotation.SysLog;
 import com.github.boot.beans.common.JSONReturn;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.MethodParameter;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -15,6 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import java.util.*;
 
 @RestController
+@RequestMapping("/test")
 public class TestController {
 
     @Autowired
@@ -22,6 +22,7 @@ public class TestController {
 
     // 获取所有controller的请求
     @GetMapping("controller/urlMapping")
+    @SysLog("获取所有映射请求")
     public JSONReturn sysList(){
         RequestMappingHandlerMapping mapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
         //获取 url与类和方法的对应信息
