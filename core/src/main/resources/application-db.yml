@@ -17,7 +17,7 @@ spring:
       connection-test-query: select 1
       max-lifetime: 1800000
       connection-timeout: 30000
-      pool-name: FebsHikariCP
+      pool-name: HikariCP
 
 #  redis:
 #    database: 1
