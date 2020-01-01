@@ -1,4 +1,4 @@
-package com.github.boot.sys;
+package com.github.boot.enums.sys;
 
 public class EnumSysMenu {
 

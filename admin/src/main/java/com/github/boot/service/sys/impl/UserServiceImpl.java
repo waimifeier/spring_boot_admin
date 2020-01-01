@@ -19,8 +19,8 @@ import com.github.boot.beans.sys.DepartmentNodeResponse;
 import com.github.boot.model.sys.*;
 import com.github.boot.service.core.CoreOrganizationalService;
 import com.github.boot.service.sys.*;
-import com.github.boot.sys.EnumDepartment;
-import com.github.boot.sys.EnumSysUser;
+import com.github.boot.enums.sys.EnumDepartment;
+import com.github.boot.enums.sys.EnumSysUser;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -16,13 +16,12 @@ import com.github.boot.service.sys.SysCompanyService;
 import com.github.boot.service.sys.SysDepartmentPositionService;
 import com.github.boot.service.sys.SysDepartmentService;
 import com.github.boot.service.sys.SysUserService;
-import com.github.boot.sys.EnumDepartment;
+import com.github.boot.enums.sys.EnumDepartment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,7 +1,11 @@
 package com.github.boot.annotation;
 
 
+
+
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -40,7 +44,7 @@ public @interface ExportConfig {
 	/**
 	 * @return 当前单元格的字体颜色 (默认 HSSFColor.BLACK.index)
 	 */
-	short color() default HSSFColor.BLACK.index;
+	short color() default Font.COLOR_RED;
 
 	/**
 	 * 将单元格的值替换为当前配置的值：<br/>

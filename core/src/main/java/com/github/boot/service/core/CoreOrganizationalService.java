@@ -1,7 +1,7 @@
 package com.github.boot.service.core;
 
 import com.github.boot.beans.sys.DepartmentNodeResponse;
-import com.github.boot.sys.EnumDepartment;
+import com.github.boot.enums.sys.EnumDepartment;
 
 import java.util.List;
 

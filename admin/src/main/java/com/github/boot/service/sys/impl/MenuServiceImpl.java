@@ -11,7 +11,7 @@ import com.github.boot.beans.sys.MenuNodeResponse;
 import com.github.boot.model.sys.SysMenu;
 import com.github.boot.service.sys.MenuService;
 import com.github.boot.service.sys.SysMenuService;
-import com.github.boot.sys.EnumSysMenu;
+import com.github.boot.enums.sys.EnumSysMenu;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
