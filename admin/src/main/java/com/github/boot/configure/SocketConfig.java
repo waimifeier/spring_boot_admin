@@ -13,16 +13,13 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ImmutableMessageChannelInterceptor;
 import org.springframework.messaging.support.MessageHeaderAccessor;
 import org.springframework.util.StringUtils;
-import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
-import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
-import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
-import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
+import org.springframework.web.socket.config.annotation.*;
 
 import java.security.Principal;
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class SocketConfig extends AbstractWebSocketMessageBrokerConfigurer  {
+public class SocketConfig implements WebSocketMessageBrokerConfigurer {
 
 
    @Autowired
@@ -58,7 +55,6 @@ public class SocketConfig extends AbstractWebSocketMessageBrokerConfigurer  {
                 };
             }
         });*/
-        super.configureWebSocketTransport(registry);
     }
 
     @Override
@@ -80,7 +76,6 @@ public class SocketConfig extends AbstractWebSocketMessageBrokerConfigurer  {
                 //不是首次连接，已经登陆成功
             }
         });
-        super.configureClientInboundChannel(registration);
     }
 
 
@@ -98,6 +93,5 @@ public class SocketConfig extends AbstractWebSocketMessageBrokerConfigurer  {
         //默认情况下： STOMP 代理中继会假设 代理监听 localhost 的61613 端口，
         // 并且 client 的 username 和password 均为 guest。当然你也可以自行定义
 
-        super.configureMessageBroker(registry);
     }
 }
