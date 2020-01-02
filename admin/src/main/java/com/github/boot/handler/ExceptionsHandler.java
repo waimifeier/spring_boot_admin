@@ -85,7 +85,7 @@ public class ExceptionsHandler {
     @ExceptionHandler({Exception.class})
     public JSONReturn exceptionHandler(Exception e) {
         e.printStackTrace();
-        return JSONReturn.buildFailure("服务器开小差了 ");
+        return JSONReturn.buildFailure("服务器异常");
     }
 
 }

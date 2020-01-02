@@ -56,11 +56,11 @@ public class JSONReturn implements Serializable {
     }
 
     public static JSONReturn buildSuccessEmptyBody() {
-        return buildSuccess(null);
+        return buildSuccess("");
     }
 
     public static JSONReturn buildFailure(String message, Integer status) {
-        return build(FAILURE, null, status, message);
+        return build(FAILURE, "", status, message);
     }
 
     public static JSONReturn buildFailure(String message) {
@@ -72,7 +72,7 @@ public class JSONReturn implements Serializable {
     }
 
     public static JSONReturn buildFailureEmptyBody() {
-        return buildSuccess(null);
+        return buildSuccess("");
     }
 
 }
