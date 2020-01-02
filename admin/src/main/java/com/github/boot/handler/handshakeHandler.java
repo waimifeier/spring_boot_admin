@@ -13,7 +13,6 @@ import java.util.Map;
 @Component
 public class handshakeHandler extends DefaultHandshakeHandler {
 
-
     @Override
     protected Principal determineUser(ServerHttpRequest request, WebSocketHandler wsHandler, Map<String, Object> attributes) {
         return new UserPrincipal(MapUtil.getStr(attributes,"token"));
