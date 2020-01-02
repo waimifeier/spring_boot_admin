@@ -69,7 +69,7 @@ public class AccountController {
      * @return
      */
     @RequestMapping("/modify_password")
-    public JSONReturn modifyPassword(@LoginUser SysUser sysUser, @RequestBody ModifyUserPasswordParams params){
+    public JSONReturn modifyPassword(@LoginUser SysUser sysUser, @RequestBody @Validated ModifyUserPasswordParams params){
         accountService.modify(sysUser,params);
         return JSONReturn.buildSuccessEmptyBody();
     }
