@@ -15,4 +15,4 @@ spring:
 
   profiles:
     include: common,db  # 引入公共的配置文件
-    active: prod      # 当前启用 dev 配置
+    active: dev      # 当前启用 dev 配置
