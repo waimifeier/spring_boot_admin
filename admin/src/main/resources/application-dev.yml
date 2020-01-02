@@ -6,5 +6,5 @@ logging:
 # 开发环境,数据库连接地址
 mysql:
   url: localhost
-  username: root
-  password: 123456
+  username: ENC(ph4c3mIv72TbbyUfzYT2xA==)
+  password: ENC(ZjvQItwSkF6nX23LQfEYOg==)
