@@ -25,4 +25,6 @@ public class FilterConfig {
         filterRegistrationBean.setInitParameters(initParameters);
         return filterRegistrationBean;
     }
+
+
 }
