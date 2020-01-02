@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.boot.dao.sys.SysCompanyDepartmentContactsMapper;
 import com.github.boot.model.sys.SysCompanyDepartmentContacts;
 import com.github.boot.service.sys.SysCompanyDepartmentContactsService;
-import com.github.boot.sys.EnumDepartment;
+import com.github.boot.enums.sys.EnumDepartment;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -12,7 +12,7 @@ import com.github.boot.model.sys.SysUser;
 import com.github.boot.service.sys.SysCompanyService;
 import com.github.boot.service.sys.SysDepartmentService;
 import com.github.boot.service.sys.SysUserService;
-import com.github.boot.sys.EnumSysUser;
+import com.github.boot.enums.sys.EnumSysUser;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

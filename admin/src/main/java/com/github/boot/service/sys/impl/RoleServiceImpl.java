@@ -15,9 +15,8 @@ import com.github.boot.beans.sys.RoleInfoResponse;
 import com.github.boot.model.sys.SysRoles;
 import com.github.boot.model.sys.SysRolesMenu;
 import com.github.boot.service.sys.*;
-import com.github.boot.sys.EnumSysMenu;
+import com.github.boot.enums.sys.EnumSysMenu;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -9,7 +9,7 @@ import com.github.boot.beans.sys.RoleInfoResponse;
 import com.github.boot.dao.sys.SysMenuMapper;
 import com.github.boot.model.sys.SysMenu;
 import com.github.boot.service.sys.SysMenuService;
-import com.github.boot.sys.EnumSysMenu;
+import com.github.boot.enums.sys.EnumSysMenu;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

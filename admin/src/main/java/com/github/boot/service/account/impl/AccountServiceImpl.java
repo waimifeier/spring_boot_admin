@@ -18,7 +18,7 @@ import com.github.boot.service.sys.SysMenuService;
 import com.github.boot.service.sys.SysRolesMenuService;
 import com.github.boot.service.sys.SysUserRolesService;
 import com.github.boot.service.sys.SysUserService;
-import com.github.boot.sys.EnumSysUser;
+import com.github.boot.enums.sys.EnumSysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

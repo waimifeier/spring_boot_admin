@@ -4,7 +4,7 @@ package com.github.boot.service.sys;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.boot.model.sys.SysCompanyDepartmentContacts;
-import com.github.boot.sys.EnumDepartment;
+import com.github.boot.enums.sys.EnumDepartment;
 
 import java.util.List;
 
