@@ -2,6 +2,8 @@
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.github.boot.model
+  global-config:
+    banner: false
 
 spring:
   datasource:
