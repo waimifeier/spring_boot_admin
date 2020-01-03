@@ -23,7 +23,7 @@ spring:
 
 jasypt:
   encryptor:
-    password: waimifeier.password   # 数据库账号密码加密
+    password: waimifeier.password   # 对数据库账号密码加密的钥匙串
 
 #  redis:
 #    database: 1
