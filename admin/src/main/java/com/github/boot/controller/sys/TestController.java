@@ -3,6 +3,7 @@ package com.github.boot.controller.sys;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.github.boot.annotation.SysLog;
+import com.github.boot.utils.poi.ExcelUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.MethodParameter;
@@ -59,27 +60,13 @@ public class TestController {
             }
         }
 
-        ExcelWriter bigWriter = ExcelUtil.getBigWriter();
-
-        bigWriter.merge(1, "一班成绩单");
-        bigWriter.write(urlList);
-        bigWriter.writeCellValue(0, urlList.size()+3,"合计");
-        bigWriter.writeCellValue(1, urlList.size()+3,urlList.size()-1);
-
-
-
-        response.setContentType("application/vnd.ms-excel;charset=utf-8");
-       //test.xls是弹出下载对话框的文件名，不能为中文，中文请自行编码
-        response.setHeader("Content-Disposition","attachment;filename=test.xls");
-        ServletOutputStream out = null;
         try {
-            out = response.getOutputStream();
+            HashMap<String,String> header = new HashMap<>();
+            header.put("url", "地址");
+            header.put("perms","方式");
+            ExcelUtils.exportResponse(response,header,urlList,"一班成绩单");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        bigWriter.flush(out);
-        // 关闭writer，释放内存
-        bigWriter.close();
     }
 }
