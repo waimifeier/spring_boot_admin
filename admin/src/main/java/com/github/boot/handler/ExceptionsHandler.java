@@ -30,7 +30,7 @@ public class ExceptionsHandler {
     @ExceptionHandler(NoHandlerFoundException.class)
     public JSONReturn handlerNoFoundException(Exception e) {
         e.printStackTrace();
-        return JSONReturn.buildFailure("资源路径不存在",HttpStatus.NOT_FOUND.value());
+        return JSONReturn.buildFailure("路径不存在，请检查路径是否正确",HttpStatus.NOT_FOUND.value());
     }
 
     @ExceptionHandler({BindException.class}) //参数传入异常
@@ -65,7 +65,7 @@ public class ExceptionsHandler {
     @ExceptionHandler({JsonParseException.class})
     public JSONReturn jsonParseException(Exception e) {
         e.printStackTrace();
-        return JSONReturn.buildFailure("json解析异常 ");
+        return JSONReturn.buildFailure("json解析异常");
     }
 
     @ExceptionHandler({NumberFormatException.class})

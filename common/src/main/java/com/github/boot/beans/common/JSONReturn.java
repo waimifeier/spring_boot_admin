@@ -4,6 +4,7 @@ package com.github.boot.beans.common;
 import cn.hutool.http.HttpStatus;
 import lombok.Data;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @ToString
+@Accessors(chain = true)
 public class JSONReturn implements Serializable {
 
     private static boolean SUCCESS = true;
@@ -21,6 +23,7 @@ public class JSONReturn implements Serializable {
     private Object content;
     private Integer status;
     private String message;
+    private Long timestamp = System.currentTimeMillis();
 
 
     private JSONReturn() {
