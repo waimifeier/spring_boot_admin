@@ -4,6 +4,7 @@ server:
   servlet:
     context-path: /    # 基础路径
 
+# 监控信息
 management:
   endpoints:
     web:
@@ -11,20 +12,30 @@ management:
       exposure:
         include: info,health  # 只监控info 和 health
 
+# info 信息
 info:
   app.name: $artifactId$
   app.description: $description$
   app.version:  $parent.version$
+  env.java_version: $java.version$
 
-
+# 加载配置
 spring:
   application:
     name: admin-application
+
+
+  profiles:
+    # 引入公共的配置文件
+    include: common,db
+
+    # 当前启用 dev 配置
+    active: dev
+
+
+  # 抛出所有异常信息
   mvc:
     throw-exception-if-no-handler-found: true
   resources:
     add-mappings: false
 
-  profiles:
-    include: common,db  # 引入公共的配置文件
-    active: dev      # 当前启用 dev 配置

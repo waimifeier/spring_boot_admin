@@ -3,6 +3,7 @@ logging:
   level:
     #  TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
     web: TRACE
+
 # 开发环境,数据库连接地址
 mysql:
   url: localhost
