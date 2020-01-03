@@ -4,6 +4,18 @@ server:
   servlet:
     context-path: /    # 基础路径
 
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: info,health  # 只监控info 和 health
+
+info:
+  app.name: $artifactId$
+  app.description: $description$
+  app.version:  $parent.version$
+
 
 spring:
   application:

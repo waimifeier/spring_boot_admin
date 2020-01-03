@@ -9,6 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <description>管理后台接口服务</description>
+
     <artifactId>admin</artifactId>
 
     <dependencies>

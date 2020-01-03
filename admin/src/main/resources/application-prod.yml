@@ -4,27 +4,8 @@ logging:
    #  TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
     web: info
 
-
-
-
-
 # 生产环境,数据库连接地址
 mysql:
   url: localhost
   username: ENC(ph4c3mIv72TbbyUfzYT2xA==)
   password: ENC(ZjvQItwSkF6nX23LQfEYOg==)
-
-
-
-
-management:
-  endpoints:
-    web:
-      base-path: /
-      exposure:
-        include: "*"
-
-info:
-  app.name: "admin"
-  app.description: "基于spring boot2.1 的管理后台接口服务"
-  app.version:  @java.version@

@@ -8,16 +8,3 @@ mysql:
   url: localhost
   username: ENC(ph4c3mIv72TbbyUfzYT2xA==)
   password: ENC(ZjvQItwSkF6nX23LQfEYOg==)
-
-
-management:
-  endpoints:
-    web:
-      base-path: /
-      exposure:
-        include: info,health  # 只监控info 和 health
-
-info:
-  app.name: "admin"
-  app.description: "基于spring boot2.1 的管理后台接口服务"
-  app.version:  $parent.version$
