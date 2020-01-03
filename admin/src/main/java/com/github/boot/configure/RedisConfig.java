@@ -1,6 +1,5 @@
 package com.github.boot.configure;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -19,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@Slf4j
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
 
