@@ -30,7 +30,7 @@ spring:
     include: common,db
 
     # 当前启用 dev 配置
-    active: dev
+    active: prod
 
 
   # 抛出所有异常信息
