@@ -59,11 +59,12 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void removeRolesById(Long id) {
-        SysRoles sysRoles = sysRolesService.getById(id);
-        if (ObjectUtil.isNull(sysRoles)) throw new PlantException("不存在该数据~");
-
-        sysRoles.setDeleted(true);
-        sysRolesService.updateById(sysRoles);
+//        SysRoles sysRoles = sysRolesService.getById(id);
+////        if (ObjectUtil.isNull(sysRoles)) throw new PlantException("不存在该数据~");
+////
+////        sysRoles.setDeleted(true);
+////        sysRolesService.updateById(sysRoles);
+        sysRolesService.removeById(id);
         log.info("删除角色成功,id{}",id);
     }
 

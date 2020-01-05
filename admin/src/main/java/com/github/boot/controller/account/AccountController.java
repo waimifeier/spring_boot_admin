@@ -8,8 +8,6 @@ import com.github.boot.beans.request.account.ModifyUserPasswordParams;
 import com.github.boot.beans.request.account.UserLoginParams;
 import com.github.boot.model.sys.SysUser;
 import com.github.boot.service.account.AccountService;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +46,7 @@ public class AccountController {
      * @return
      */
     @RequestMapping("/login")
-    public JSONReturn login(@RequestBody @Validated UserLoginParams params, @PageableDefault Pageable pageable){
+    public JSONReturn login(@RequestBody @Validated UserLoginParams params){
         return JSONReturn.buildSuccess(accountService.login(params));
     }
 

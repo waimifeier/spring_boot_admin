@@ -23,7 +23,6 @@ public class JSONReturn implements Serializable {
     private Object content;
     private Integer status;
     private String message;
-    private Long timestamp = System.currentTimeMillis();
 
 
     private JSONReturn() {

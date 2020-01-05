@@ -4,12 +4,17 @@ mybatis-plus:
   type-aliases-package: com.github.boot.model
   global-config:
     banner: false
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      id-type: assign_id
 
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://${mysql.url}:3306/basic_admin?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:p6spy:mysql://${mysql.url}:3306/basic_admin?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&tinyInt1isBit=false&useSSL=false
     username: ${mysql.username}
     password: ${mysql.password}
     initialization-mode: never   # 每次启动总是 执行sql文件
@@ -21,15 +26,16 @@ spring:
       connection-timeout: 30000
       pool-name: HikariCP
 
+  redis:
+    database: 1
+    host: 127.0.0.1
+    timeout: 3000
+    jedis:
+      pool:
+        max-active: 50
+        min-idle: 0
+
 jasypt:
   encryptor:
     password: waimifeier.password   # 对数据库账号密码加密的钥匙串
 
-#  redis:
-#    database: 1
-#    host: 127.0.0.1
-#    timeout: 3000
-#    jedis:
-#      pool:
-#        max-active: 50
-#        min-idle: 0

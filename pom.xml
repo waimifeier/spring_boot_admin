@@ -20,16 +20,16 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <lombok.version>1.16.20</lombok.version>
-        <spring-boot.version>2.1.3.RELEASE</spring-boot.version>
+        <spring-boot.version>2.2.1.RELEASE</spring-boot.version>
         <hutool.version>4.1.14</hutool.version>
-        <mysql.version>5.1.45</mysql.version>
-        <mybatis-plus.version>3.1.0</mybatis-plus.version>
+        <mysql.version>6.0.6</mysql.version>
+        <mybatis-plus.version>3.3.0</mybatis-plus.version>
         <commons.io.version>2.5</commons.io.version>
         <commons.lang.version>2.6</commons.lang.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <fastjson.version>1.2.44</fastjson.version>
         <poi.version>3.17</poi.version>
-        <logbook.version>1.3.0</logbook.version>
+        <p6spy.version>3.8.0</p6spy.version>
     </properties>
 
     <dependencyManagement>
@@ -76,30 +76,21 @@
                 <artifactId>commons-beanutils</artifactId>
                 <version>${commons-beanutils.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
-
-          <!--  <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi</artifactId>
-                <version>${poi.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-scratchpad</artifactId>
-                <version>${poi.version}</version>
-            </dependency>-->
-
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml</artifactId>
                 <version>${poi.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>p6spy</groupId>
+                <artifactId>p6spy</artifactId>
+                <version>${p6spy.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -16,8 +16,9 @@ management:
 info:
   app.name: $artifactId$
   app.description: $description$
-  app.version:  $parent.version$
+  app.version: $version$
   env.java_version: $java.version$
+  env.springBoot_version: $spring-boot.version$
 
 # 加载配置
 spring:
@@ -30,12 +31,6 @@ spring:
     include: common,db
 
     # 当前启用 dev 配置
-    active: prod
+    active: dev
 
-
-  # 抛出所有异常信息
-  mvc:
-    throw-exception-if-no-handler-found: true
-  resources:
-    add-mappings: false
 

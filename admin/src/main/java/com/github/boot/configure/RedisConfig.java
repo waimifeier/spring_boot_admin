@@ -17,6 +17,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @Configuration
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
@@ -39,6 +40,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * redis缓存管理器配置列表；
      * 可以根据业务需要配置不同的过期时间；
      */
+
     private Map<String, RedisCacheConfiguration> cacheConfigurationMap() {
         Map<String, RedisCacheConfiguration> configurationMap = new HashMap<>();
         // 将菜单列缓存30分钟 cacheNames="MenuList"

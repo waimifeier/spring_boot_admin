@@ -42,6 +42,10 @@ public class MessageController {
      * 用户订阅路径： /topic/system_notice
      */
    // @Scheduled(cron = "*/1 * * * * ?")
+
+    /**
+     * 将系统时间推送给，订阅过/topic/system_notice主题的用户
+     */
     public void sendSystemMessage() {
         SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sm.format(new Date());
