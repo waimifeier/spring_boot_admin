@@ -266,9 +266,9 @@ public class UserServiceImpl implements UserService {
                                         .collect(Collectors.groupingBy(SysUser::getState));
             Set<Integer> integers = groupSysUser.keySet();
             for (Integer state : integers) {
-                if(state==EnumSysUser.State.deleted.getKey()) remove = groupSysUser.get(state).size();
-                if(state==EnumSysUser.State.disabled.getKey()) disabled = groupSysUser.get(state).size();
-                if(state==EnumSysUser.State.normal.getKey()) all = groupSysUser.get(state).size();
+                if(Objects.equals(state, EnumSysUser.State.deleted.getKey())) remove = groupSysUser.get(state).size();
+                if(Objects.equals(state, EnumSysUser.State.disabled.getKey())) disabled = groupSysUser.get(state).size();
+                if(Objects.equals(state, EnumSysUser.State.normal.getKey())) all = groupSysUser.get(state).size();
             }
         }
         data.put("all",all+disabled);

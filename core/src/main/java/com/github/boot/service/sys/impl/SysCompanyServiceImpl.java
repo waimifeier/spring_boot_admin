@@ -26,7 +26,6 @@ public class SysCompanyServiceImpl extends ServiceImpl<SysCompanyMapper, SysComp
         List<SysCompany> department = baseMapper.selectList(
                 new LambdaQueryWrapper<SysCompany>()
                         .in(SysCompany::getParentId, currentIds)
-                        .eq(SysCompany::getDeleted , false)
         );
         companyIds.addAll(currentIds);
 
@@ -46,7 +45,6 @@ public class SysCompanyServiceImpl extends ServiceImpl<SysCompanyMapper, SysComp
         SysCompany sysCompany = baseMapper.selectOne(
                 new LambdaQueryWrapper<SysCompany>()
                         .eq(SysCompany::getId, companyId)
-                        .eq(SysCompany::getDeleted , false)
         );
 
         if(ObjectUtil.isNull(sysCompany)) return result;

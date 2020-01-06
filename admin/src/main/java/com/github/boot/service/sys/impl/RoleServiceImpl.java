@@ -4,19 +4,17 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.github.boot.beans.common.PageInfo;
 import com.github.boot.beans.common.PlantException;
 import com.github.boot.beans.common.QueryPage;
 import com.github.boot.beans.request.sys.EditorRolesParams;
 import com.github.boot.beans.sys.MenuNodeResponse;
 import com.github.boot.beans.sys.RoleInfoResponse;
+import com.github.boot.enums.sys.EnumSysMenu;
 import com.github.boot.model.sys.SysRoles;
 import com.github.boot.model.sys.SysRolesMenu;
 import com.github.boot.service.sys.*;
-import com.github.boot.enums.sys.EnumSysMenu;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +24,6 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
-@Slf4j
 public class RoleServiceImpl implements RoleService {
 
 
@@ -47,7 +44,7 @@ public class RoleServiceImpl implements RoleService {
     public PageInfo getRoleList(HashMap<String, Object> params) {
 
         LambdaQueryWrapper<SysRoles> sysRolesQueryWrapper = new LambdaQueryWrapper<>();
-        sysRolesQueryWrapper.eq(SysRoles::getDeleted, false).orderByDesc(SysRoles::getCreateTime);
+        sysRolesQueryWrapper.orderByDesc(SysRoles::getCreateTime);
 
         String roleName = MapUtil.getStr(params, "roleName");
         if (StringUtils.isNotEmpty(roleName))
@@ -59,13 +56,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void removeRolesById(Long id) {
-//        SysRoles sysRoles = sysRolesService.getById(id);
-////        if (ObjectUtil.isNull(sysRoles)) throw new PlantException("不存在该数据~");
-////
-////        sysRoles.setDeleted(true);
-////        sysRolesService.updateById(sysRoles);
         sysRolesService.removeById(id);
-        log.info("删除角色成功,id{}",id);
     }
 
 
@@ -227,13 +218,10 @@ public class RoleServiceImpl implements RoleService {
      */
     private boolean batchUpdateRolesMenu(List<Long> menuId, Long sysRolesId) {
 
-        // 修改的字段
-        SysRolesMenu rolesMenu = new SysRolesMenu().setDeleted(true);
-
         // 根据指定条件更新数据
         LambdaQueryWrapper<SysRolesMenu> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.in(SysRolesMenu::getSysMenuId, menuId).eq(SysRolesMenu::getSysRoleId, sysRolesId);
 
-        return sysRolesMenuService.update(rolesMenu, queryWrapper);
+        return sysRolesMenuService.remove(queryWrapper);
     }
 }

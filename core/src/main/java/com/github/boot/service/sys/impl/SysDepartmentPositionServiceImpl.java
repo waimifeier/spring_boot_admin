@@ -20,7 +20,6 @@ public class SysDepartmentPositionServiceImpl
     public List<SysDepartmentPosition> queryPositionByDepartmentId(Long departmentId){
         return baseMapper.selectList(
                 new LambdaQueryWrapper<SysDepartmentPosition>()
-                        .eq(SysDepartmentPosition::getDeleted, false)
                         .eq(SysDepartmentPosition::getDepartmentId, departmentId)
         );
     }

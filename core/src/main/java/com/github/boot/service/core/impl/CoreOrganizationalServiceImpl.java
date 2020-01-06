@@ -65,7 +65,6 @@ public class CoreOrganizationalServiceImpl implements CoreOrganizationalService 
         List<SysCompany> dbCompanies = sysCompanyService.list(
                 new LambdaQueryWrapper<SysCompany>()
                         .eq(SysCompany::getParentId, ObjectUtil.isNotNull(company) ? company.getValue() : 0L)
-                        .eq(SysCompany::getDeleted, false)
         );
 
         // 如果传入公司没有子公司
@@ -114,7 +113,6 @@ public class CoreOrganizationalServiceImpl implements CoreOrganizationalService 
         List<DepartmentNodeResponse> result = new ArrayList<>();
         List<SysDepartment> dbDepartment = sysDepartmentService.list(
                 new LambdaQueryWrapper<SysDepartment>()
-                        .eq(SysDepartment::getDeleted, false)
                         .eq(SysDepartment::getCompanyId, companyId)
                         .eq(SysDepartment::getParentId, ObjectUtil.isNull(department.getValue())? 0L : department.getValue())
         );
@@ -183,7 +181,6 @@ public class CoreOrganizationalServiceImpl implements CoreOrganizationalService 
 
         Integer childDeptCount = sysDepartmentService.count(
                 new LambdaQueryWrapper<SysDepartment>()
-                        .eq(SysDepartment::getDeleted, false)
                         .eq(SysDepartment::getParentId, departmentId)
         );
 
@@ -209,7 +206,6 @@ public class CoreOrganizationalServiceImpl implements CoreOrganizationalService 
 
         Integer childCompanyCount = sysCompanyService.count(
                 new LambdaQueryWrapper<SysCompany>()
-                        .eq(SysCompany::getDeleted, false)
                         .eq(SysCompany::getParentId, companyId)
         );
 
@@ -219,7 +215,6 @@ public class CoreOrganizationalServiceImpl implements CoreOrganizationalService 
 
         Integer childDeptCount = sysDepartmentService.count(
                 new LambdaQueryWrapper<SysDepartment>()
-                        .eq(SysDepartment::getDeleted, false)
                         .eq(SysDepartment::getCompanyId, companyId)
         );
 

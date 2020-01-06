@@ -27,7 +27,6 @@ public class SysRolesServiceImpl extends ServiceImpl<SysRolesMapper, SysRoles> i
     @Override
     public List<SysRoles> allList() {
         LambdaQueryWrapper<SysRoles> q = new LambdaQueryWrapper<>();
-        q.eq(SysRoles::getDeleted,false);
         List<SysRoles> sysRoles = baseMapper.selectList(q);
        return sysRoles;
     }

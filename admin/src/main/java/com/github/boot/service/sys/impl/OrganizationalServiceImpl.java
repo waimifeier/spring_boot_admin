@@ -210,6 +210,7 @@ public class OrganizationalServiceImpl implements OrganizationalService {
     }
 
     private void saveOrUpdateDepartment (DepartmentRequestParams params, SysDepartment dbDepartment){
+        params.setId(null);
         dbDepartment.setDepartmentName(params.getName());
         dbDepartment.setAgentUser(params.getAgentId());
         if(dbDepartment.getId()==null){
@@ -250,19 +251,14 @@ public class OrganizationalServiceImpl implements OrganizationalService {
 
         LambdaQueryWrapper<SysCompanyDepartmentContacts> query = new LambdaQueryWrapper<SysCompanyDepartmentContacts>()
                 .eq(SysCompanyDepartmentContacts::getPostId, postId)
-                .eq(SysCompanyDepartmentContacts::getTypes, organizeType.getKey())
-                .eq(SysCompanyDepartmentContacts::getDeleted, false);
+                .eq(SysCompanyDepartmentContacts::getTypes, organizeType.getKey());
 
         List<SysCompanyDepartmentContacts> dbCompanyDepartmentContacts = sysCompanyDepartmentContactsService.list(query);
 
         // 如果前端传入的联系方式为空, 删除数据库的联系方式
         if(CollectionUtil.isEmpty(contactsParams)){
-
             if( CollectionUtil.isEmpty(dbCompanyDepartmentContacts) ) return;
-
-            SysCompanyDepartmentContacts modify = new SysCompanyDepartmentContacts();
-            modify.setDeleted(true);
-            sysCompanyDepartmentContactsService.update(modify, query);   // 删除所有
+            sysCompanyDepartmentContactsService.remove( query);   // 删除所有
             return;
         }
 
@@ -281,6 +277,7 @@ public class OrganizationalServiceImpl implements OrganizationalService {
                 update.setTypes(organizeType.getKey());
                 update.setCreateUser(userId);
                 update.setPostId(postId);
+                update.setId(null);
                 sysCompanyDepartmentContactsService.save(update);
                 continue;
             }
@@ -313,7 +310,6 @@ public class OrganizationalServiceImpl implements OrganizationalService {
 
         // 1. 构建查询条件
         LambdaQueryWrapper<SysDepartmentPosition> query = new LambdaQueryWrapper<SysDepartmentPosition>()
-                .eq(SysDepartmentPosition::getDeleted, false)
                 .eq(SysDepartmentPosition::getDepartmentId, dbDepartmentId);
 
         // 2.查询数据库该部门的联系人
@@ -360,11 +356,9 @@ public class OrganizationalServiceImpl implements OrganizationalService {
         dbPositionIds.removeAll(paramsId);
         if(CollectionUtil.isEmpty(dbPositionIds)) return;
         // 7. 取交集后，剩下的数据，就是前端本次删除的职位信息。
-        SysDepartmentPosition remove = new SysDepartmentPosition();
-        remove.setDeleted(true);
         LambdaQueryWrapper removeQuery = new LambdaQueryWrapper<SysDepartmentPosition>()
                 .in(SysDepartmentPosition::getId,dbPositionIds);
-        sysDepartmentPositionService.update(remove, removeQuery);
+        sysDepartmentPositionService.remove(removeQuery);
     }
 
 

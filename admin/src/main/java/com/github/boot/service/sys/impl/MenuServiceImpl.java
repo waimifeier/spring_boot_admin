@@ -4,7 +4,6 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.github.boot.beans.common.PlantException;
 import com.github.boot.beans.request.sys.SysMenuParams;
 import com.github.boot.beans.sys.MenuNodeResponse;
@@ -12,6 +11,8 @@ import com.github.boot.model.sys.SysMenu;
 import com.github.boot.service.sys.MenuService;
 import com.github.boot.service.sys.SysMenuService;
 import com.github.boot.enums.sys.EnumSysMenu;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,8 +45,8 @@ public class MenuServiceImpl implements MenuService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void removeMenu(Long id) {
-        List<Long> removeIds = new ArrayList<>();
-        removeIds.add(id);
+        List<Long> removeIds = CollectionUtil.newArrayList(id);
+        // 所有所有子节点id
         bathDeleteChild(id, removeIds);
 
         sysMenuService.removeByIds(removeIds); // 删除所有子节点

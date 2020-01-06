@@ -33,7 +33,6 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
         List<SysDepartment> department = baseMapper.selectList(
                 new LambdaQueryWrapper<SysDepartment>()
                         .in(SysDepartment::getParentId, currentIds)
-                        .eq(SysDepartment::getDeleted , false)
         );
         departmentIds.addAll(currentIds);
 
@@ -53,7 +52,6 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
         SysDepartment department = baseMapper.selectOne(
                 new LambdaQueryWrapper<SysDepartment>()
                         .eq(SysDepartment::getId, departmentId)
-                        .eq(SysDepartment::getDeleted , false)
         );
 
         if(ObjectUtil.isNull(department)) return departmentIds;

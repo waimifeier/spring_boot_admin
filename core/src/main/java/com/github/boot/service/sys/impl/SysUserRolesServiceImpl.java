@@ -49,7 +49,7 @@ public class SysUserRolesServiceImpl extends ServiceImpl<SysUserRolesMapper, Sys
     public void deleteAllRoles(Long userId) {
         SysUserRoles roles = new SysUserRoles().setDeleted(true);
         LambdaQueryWrapper<SysUserRoles> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(SysUserRoles::getDeleted,false).eq(SysUserRoles::getSysUserId,userId);
+        queryWrapper.eq(SysUserRoles::getSysUserId,userId);
         baseMapper.update(roles,queryWrapper);
     }
 }

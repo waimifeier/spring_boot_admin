@@ -27,7 +27,7 @@ public class SysRolesMenuServiceImpl extends ServiceImpl<SysRolesMenuMapper, Sys
     @Override
     public List<Long> queryRoleMenuId(List<Long> sysRolesId) {
         LambdaQueryWrapper<SysRolesMenu> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.in(SysRolesMenu::getSysRoleId,sysRolesId).eq(SysRolesMenu::getDeleted,false);
+        queryWrapper.in(SysRolesMenu::getSysRoleId,sysRolesId);
         List<SysRolesMenu> sysRolesMenus = baseMapper.selectList(queryWrapper);
 
         return CollectionUtil.isEmpty(sysRolesMenus) ? new ArrayList<>() :

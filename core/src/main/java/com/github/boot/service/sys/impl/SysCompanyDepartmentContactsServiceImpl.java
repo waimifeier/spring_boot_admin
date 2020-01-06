@@ -19,7 +19,6 @@ public class SysCompanyDepartmentContactsServiceImpl extends
 
         List<SysCompanyDepartmentContacts> sysCompanyDepartmentContacts = baseMapper.selectList(
                 new LambdaQueryWrapper<SysCompanyDepartmentContacts>()
-                        .eq(SysCompanyDepartmentContacts::getDeleted, false)
                         .eq(SysCompanyDepartmentContacts::getPostId, id)
                         .eq(SysCompanyDepartmentContacts::getTypes, organizeType.getKey())
         );
