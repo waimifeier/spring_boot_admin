@@ -87,7 +87,6 @@ public class AccountServiceImpl implements AccountService {
         return dbUser;
     }
 
-
     private SysUser findSysUserByAccountOrPhone(UserLoginParams params) {
         //1 用账号去查找用户
         SysUser account = sysUserService.getOne(new QueryWrapper<SysUser>().eq("account", params.getUserName()));
