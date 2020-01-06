@@ -43,16 +43,13 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private SysMenuService sysMenuService;
 
-
     @Override
     public Object login(UserLoginParams params) {
 
         SysUser dbUser = validatorLoginUser(params);  // 允许"账号" 或 "手机号" 登录
 
-
         BackendTokenBean backendTokenBean = new BackendTokenBean();
         BeanUtil.copyProperties(backendTokenBean, dbUser);
-
 
         //构建用户信息
         Map<String, Object> userProfile = buildUserProfile(dbUser);
