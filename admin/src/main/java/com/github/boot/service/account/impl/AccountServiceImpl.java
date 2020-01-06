@@ -71,7 +71,6 @@ public class AccountServiceImpl implements AccountService {
         return result;
     }
 
-
     //校验登录用户
     private SysUser validatorLoginUser(UserLoginParams params) {
 
@@ -91,7 +90,6 @@ public class AccountServiceImpl implements AccountService {
         return dbUser;
     }
 
-
     private SysUser findSysUserByAccountOrPhone(UserLoginParams params) {
         //1 用账号去查找用户
         SysUser account = sysUserService.getOne(new QueryWrapper<SysUser>().eq("account", params.getUserName()));
@@ -102,7 +100,6 @@ public class AccountServiceImpl implements AccountService {
         }
         return account;
     }
-
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -155,7 +152,6 @@ public class AccountServiceImpl implements AccountService {
         buildPermissionCode(basicMenus, checkMenuId);
         return basicMenus;
     }
-
 
     private void buildPermissionCode(List<RoleInfoResponse.BasicMenu> basicMenus, List<Long> ids) {
         basicMenus.forEach(it -> {
