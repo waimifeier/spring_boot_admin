@@ -19,7 +19,6 @@ public class SysUserListResponse implements Serializable {
 
     private String account;
 
-
     private String photo;
 
     private Date loginTime;
