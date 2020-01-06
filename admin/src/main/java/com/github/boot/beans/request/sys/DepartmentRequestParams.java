@@ -28,7 +28,6 @@ public class DepartmentRequestParams  {
 
     private String address; // 公司地址
 
-    @NotNull(message = "请选择负责人")
     private Long agentId; // 部门负责人或公司负责人
 
     private List<Contacts> contacts; // 联系人
