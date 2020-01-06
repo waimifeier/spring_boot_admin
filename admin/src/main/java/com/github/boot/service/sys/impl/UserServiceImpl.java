@@ -7,7 +7,6 @@ import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.boot.beans.common.PageInfo;
 import com.github.boot.beans.common.PlantException;
@@ -21,6 +20,7 @@ import com.github.boot.service.core.CoreOrganizationalService;
 import com.github.boot.service.sys.*;
 import com.github.boot.enums.sys.EnumDepartment;
 import com.github.boot.enums.sys.EnumSysUser;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -153,12 +153,12 @@ public class UserServiceImpl implements UserService {
 
         SysUser sysUser = sysUserService.getById(id);
         if(ObjectUtil.isNull(sysUser)) throw new PlantException("不存在该用户");
-        if(sysUser.getState()==EnumSysUser.State.deleted.getKey()) throw new PlantException("该用户已删除");
+        if(sysUser.getState().equals(EnumSysUser.State.deleted.getKey())) throw new PlantException("该用户已删除");
 
-        if(sysUser.getAccountType()==EnumSysUser.AccountType.superAdmin.getKey())
+        if(sysUser.getAccountType().equals(EnumSysUser.AccountType.superAdmin.getKey()))
             throw new PlantException("禁止针对超级管理员执行此操作");
 
-        Integer state = sysUser.getState()==EnumSysUser.State.normal.getKey() ?
+        Integer state = sysUser.getState().equals(EnumSysUser.State.normal.getKey()) ?
                 EnumSysUser.State.disabled.getKey(): EnumSysUser.State.normal.getKey();
         sysUser.setState(state);
         sysUserService.updateById(sysUser);
@@ -171,7 +171,7 @@ public class UserServiceImpl implements UserService {
 
         SysUser sysUser = sysUserService.getById(id);
         if(ObjectUtil.isNull(sysUser)) throw new PlantException("不存在该用户");
-        if(sysUser.getAccountType()== EnumSysUser.AccountType.superAdmin.getKey())
+        if(sysUser.getAccountType().equals(EnumSysUser.AccountType.superAdmin.getKey()))
             throw new PlantException("禁止删除超级管理员");
 
         sysUser.setState(EnumSysUser.State.deleted.getKey());
@@ -192,7 +192,7 @@ public class UserServiceImpl implements UserService {
 
 
         sysUserParams.setCreateUser(0L);
-        sysUserParams.setPhoto(sysUserParams.getSex()== EnumSysUser.Sex.female.getKey()?nv:nan);
+        sysUserParams.setPhoto(sysUserParams.getSex().equals(EnumSysUser.Sex.female.getKey()) ?nv:nan);
         sysUserParams.setState(EnumSysUser.State.normal.getKey());
         sysUserParams.setCreateTime(new Date());
         sysUserParams.setPassword(SecureUtil.sha1(sysUserParams.getPassword()));
