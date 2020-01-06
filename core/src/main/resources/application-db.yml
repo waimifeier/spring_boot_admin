@@ -8,13 +8,12 @@ mybatis-plus:
       logic-delete-field: deleted
       logic-delete-value: 1
       logic-not-delete-value: 0
-      id-type: assign_id
 
 spring:
   datasource:
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:p6spy:mysql://${mysql.url}:3306/basic_admin?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&tinyInt1isBit=false&useSSL=false
+    url: jdbc:p6spy:mysql://${mysql.url}:3306/basic_admin?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&tinyInt1isBit=false&useSSL=false
     username: ${mysql.username}
     password: ${mysql.password}
     initialization-mode: never   # 每次启动总是 执行sql文件
