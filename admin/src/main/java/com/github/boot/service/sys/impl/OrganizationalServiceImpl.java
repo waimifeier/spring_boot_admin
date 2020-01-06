@@ -409,7 +409,7 @@ public class OrganizationalServiceImpl implements OrganizationalService {
         currentNode.setAddress("");
         currentNode.setAgentId(department.getAgentUser());
         SysUser sysUser = sysUserService.getById(department.getAgentUser());
-        currentNode.setAgentUser(ObjectUtil.isNull(sysUser) ? "代理人未知" : sysUser.getNickName());
+        currentNode.setAgentUser(ObjectUtil.isNull(sysUser) ? "-" : sysUser.getNickName());
         currentNode.setCode(EnumDepartment.OrganizeType.DEPARTMENT.getKey());
         currentNode.setName(department.getDepartmentName());
         currentNode.setId(department.getId());
@@ -423,7 +423,7 @@ public class OrganizationalServiceImpl implements OrganizationalService {
         currentNode.setAddress(sysCompany.getAddress());
         currentNode.setAgentId(sysCompany.getAgentId());
         SysUser sysUser = sysUserService.getById(sysCompany.getAgentId());
-        currentNode.setAgentUser(ObjectUtil.isNull(sysUser) ? "代理人未知" : sysUser.getNickName());
+        currentNode.setAgentUser(ObjectUtil.isNull(sysUser) ? "-" : sysUser.getNickName());
         currentNode.setCode(EnumDepartment.OrganizeType.COMPANY.getKey());
         currentNode.setName(sysCompany.getCompanyName());
         currentNode.setId(sysCompany.getId());
