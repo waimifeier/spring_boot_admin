@@ -32,7 +32,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("/health");
     }
 
-
     @Bean
     public ObjectMapper jacksonObjectMapper(Jackson2ObjectMapperBuilder builder) {
         ObjectMapper objectMapper = builder.createXmlMapper(false).build();

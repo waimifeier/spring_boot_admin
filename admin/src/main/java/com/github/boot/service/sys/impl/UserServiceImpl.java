@@ -201,6 +201,7 @@ public class UserServiceImpl implements UserService {
         sysUserParams.setDepartmentId(position.getDepartmentId());
         SysDepartment department = sysDepartmentService.getById(position.getDepartmentId());
         sysUserParams.setCompanyId(department.getCompanyId());
+        sysUserParams.setId(null);
         sysUserService.save(sysUserParams);
 
     }
