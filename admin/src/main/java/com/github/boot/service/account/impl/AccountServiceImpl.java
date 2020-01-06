@@ -78,12 +78,12 @@ public class AccountServiceImpl implements AccountService {
         SysUser dbUser = findSysUserByAccountOrPhone(params);
 
         if (ObjectUtil.isNull(dbUser)) throw new PlantException("登录账号不存在~");
-        if (dbUser.getState() == EnumSysUser.State.deleted.getKey()) throw new PlantException("您的账号已被删除,禁止登录！");
-        if (dbUser.getState() == EnumSysUser.State.disabled.getKey()) throw new PlantException("您的账号已被禁用,无法登入系统");
+        if (dbUser.getState().equals(EnumSysUser.State.deleted.getKey())) throw new PlantException("您的账号已被删除,禁止登录！");
+        if (dbUser.getState().equals(EnumSysUser.State.disabled.getKey())) throw new PlantException("您的账号已被禁用,无法登入系统");
         if (!dbUser.getPassword().equals(SecureUtil.sha1(params.getPassword())))
             throw new PlantException("密码错误~");
 
-        if (dbUser.getAccountType()==EnumSysUser.AccountType.superAdmin.getKey()) return dbUser;
+        if (dbUser.getAccountType().equals(EnumSysUser.AccountType.superAdmin.getKey())) return dbUser;
 
         List<SysRoles> sysRoles = sysUserRolesService.selectRolesByUserId(dbUser.getId());
         if (CollectionUtil.isEmpty(sysRoles))
