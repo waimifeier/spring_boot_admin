@@ -10,7 +10,7 @@ import java.util.List;
  * 部门添加修改参数
  */
 @Data
-public class DepartmentRequestParams  {
+public class DepartmentRequestParams {
 
     private Long id;
 
@@ -24,7 +24,7 @@ public class DepartmentRequestParams  {
     private String parentCode; // 上级部门或公司的code
 
     @NotEmpty(message = "名称不能为空")
-    private String name; // 公司名称 或 不猛名称
+    private String name; // 公司名称 或 名称
 
     private String address; // 公司地址
 
