@@ -3,6 +3,8 @@ package com.github.boot.handler;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.github.boot.beans.common.JSONReturn;
 import com.github.boot.beans.common.PlantException;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @ControllerAdvice
 @ResponseBody
 @ResponseStatus(HttpStatus.OK)
+@Order(value = Ordered.HIGHEST_PRECEDENCE)
 public class ExceptionsHandler {
 
     @ExceptionHandler({PlantException.class}) //业务异常
