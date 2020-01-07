@@ -16,7 +16,7 @@ import java.util.List;
  * @author dlj
  * @since 2019-07-24
  */
-public interface SysUserService extends IService<SysUser> {
+public interface SysUserService extends IService<SysUser>{
     
 
     IPage<SysUser> userNotDispatch(IPage<Object> instance, String nickName);

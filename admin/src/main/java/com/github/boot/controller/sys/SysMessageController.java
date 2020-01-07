@@ -3,6 +3,8 @@ package com.github.boot.controller.sys;
 
 import com.github.boot.beans.common.JSONReturn;
 import com.github.boot.service.sys.SysMessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +29,7 @@ public class SysMessageController {
      * @param params
      * @return
      */
-    @RequestMapping("/list")
+    @PostMapping("/list")
     public JSONReturn messageList(@RequestBody HashMap<String,Object> params){
 
         return JSONReturn.buildSuccess(sysMessageService.messageList(params));
@@ -39,7 +41,7 @@ public class SysMessageController {
      * @param ids
      * @return
      */
-    @RequestMapping("/sign_read")
+    @PostMapping("/sign_read")
     public JSONReturn SignRead(@RequestBody List<Long> ids){
         sysMessageService.SignRead(ids);
         return JSONReturn.buildSuccessEmptyBody();

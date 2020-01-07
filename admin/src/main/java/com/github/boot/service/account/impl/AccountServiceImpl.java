@@ -11,6 +11,7 @@ import com.github.boot.beans.request.account.ModifyUserPasswordParams;
 import com.github.boot.beans.request.account.UserLoginParams;
 import com.github.boot.beans.response.account.BackendTokenBean;
 import com.github.boot.beans.sys.RoleInfoResponse;
+import com.github.boot.enums.sys.EnumSysUser;
 import com.github.boot.model.sys.SysRoles;
 import com.github.boot.model.sys.SysUser;
 import com.github.boot.service.account.AccountService;
@@ -18,30 +19,50 @@ import com.github.boot.service.sys.SysMenuService;
 import com.github.boot.service.sys.SysRolesMenuService;
 import com.github.boot.service.sys.SysUserRolesService;
 import com.github.boot.service.sys.SysUserService;
-import com.github.boot.enums.sys.EnumSysUser;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl implements AccountService, UserDetailsService {
 
-    @Autowired
+    @Resource
     private SysUserService sysUserService;
 
-    @Autowired
+    @Resource
     private SysUserRolesService sysUserRolesService;
 
-    @Autowired
+    @Resource
     private SysRolesMenuService sysRolesMenuService;
 
-    @Autowired
+    @Resource
     private SysMenuService sysMenuService;
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        if (StringUtils.isNotEmpty(username)) {
+            SysUser dbUser = findSysUserByAccountOrPhone(username);  // 允许"账号" 或 "手机号" 登录
+            if (ObjectUtil.isNull(dbUser)) return null;
+
+            return User.withUsername(dbUser.getNickName())
+                    .password(dbUser.getPassword())
+                    .roles("admin")   // 角色
+                    .authorities("pa")  // 权限
+                    .build();
+        }
+        return null;
+    }
 
     @Override
     public Object login(UserLoginParams params) {
@@ -55,7 +76,7 @@ public class AccountServiceImpl implements AccountService {
         Map<String, Object> userProfile = buildUserProfile(dbUser);
 
         //生成 token
-        String token = UUID.randomUUID().toString().toLowerCase().replace("-","");
+        String token = UUID.randomUUID().toString().toLowerCase().replace("-", "");
 
         return token;
     }
@@ -71,7 +92,7 @@ public class AccountServiceImpl implements AccountService {
     //校验登录用户
     private SysUser validatorLoginUser(UserLoginParams params) {
 
-        SysUser dbUser = findSysUserByAccountOrPhone(params);
+        SysUser dbUser = findSysUserByAccountOrPhone(params.getUserName());
 
         if (ObjectUtil.isNull(dbUser)) throw new PlantException("登录账号不存在~");
         if (dbUser.getState().equals(EnumSysUser.State.deleted.getKey())) throw new PlantException("您的账号已被删除,禁止登录！");
@@ -87,13 +108,13 @@ public class AccountServiceImpl implements AccountService {
         return dbUser;
     }
 
-    private SysUser findSysUserByAccountOrPhone(UserLoginParams params) {
+    private SysUser findSysUserByAccountOrPhone(String userName) {
         //1 用账号去查找用户
-        SysUser account = sysUserService.getOne(new QueryWrapper<SysUser>().eq("account", params.getUserName()));
+        SysUser account = sysUserService.getOne(new QueryWrapper<SysUser>().eq("account", userName));
 
         //2 如果账号不存在，用手机号查找用户
         if (ObjectUtil.isNull(account)) {
-            account = sysUserService.getOne(new QueryWrapper<SysUser>().eq("phone", params.getUserName()));
+            account = sysUserService.getOne(new QueryWrapper<SysUser>().eq("phone", userName));
         }
         return account;
     }
@@ -159,5 +180,6 @@ public class AccountServiceImpl implements AccountService {
             }
         });
     }
+
 
 }

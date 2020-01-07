@@ -9,10 +9,12 @@ import com.github.boot.service.sys.OrganizationalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +22,7 @@ import java.util.Map;
 @RequestMapping("/department")
 public class OrganizationalController {
 
-    @Autowired
+    @Resource
     private OrganizationalService organizationalService;
 
 
@@ -29,7 +31,7 @@ public class OrganizationalController {
      * @param params
      * @return
      */
-    @RequestMapping("/add")
+    @PostMapping("/add")
     public JSONReturn addDepartment(@RequestBody @Validated DepartmentRequestParams params, @LoginUser Long userId){
         organizationalService.addDepartment(params, userId);
         return JSONReturn.buildSuccessEmptyBody();
@@ -40,7 +42,7 @@ public class OrganizationalController {
      * @param params
      * @return
      */
-    @RequestMapping("/modify")
+    @PostMapping("/modify")
     public JSONReturn modifyDepartment(@RequestBody @Validated DepartmentRequestParams params, @LoginUser Long userId){
         organizationalService.modifyDepartment(params, userId);
         return JSONReturn.buildSuccessEmptyBody();
@@ -50,7 +52,7 @@ public class OrganizationalController {
      * 4. 查看详情
      * @return
      */
-    @RequestMapping("/detail")
+    @PostMapping("/detail")
     public JSONReturn detail(@RequestBody DepartmentRequestParams params){
         Map<String, Object> response = organizationalService.detail(params);
         return JSONReturn.buildSuccess(response);
@@ -61,7 +63,7 @@ public class OrganizationalController {
      * 5. 获取组织架构树结构
      * @return
      */
-    @RequestMapping("/list")
+    @PostMapping("/list")
     public JSONReturn list(){
         return JSONReturn.buildSuccess(
                 organizationalService.nodeList()
@@ -71,7 +73,7 @@ public class OrganizationalController {
     /**
      * 6. 获取公司
      */
-    @RequestMapping("/companyOrDepartmentList")
+    @PostMapping("/companyOrDepartmentList")
     public JSONReturn companyOrDepartmentList(@RequestBody HashMap<String,Object> params){
 
         String code = MapUtil.getStr(params, "code");
@@ -82,7 +84,7 @@ public class OrganizationalController {
         );
     }
 
-    @RequestMapping("/agent_list")
+    @PostMapping("/agent_list")
     public JSONReturn agentList(){
         return JSONReturn.buildSuccess(
                 organizationalService.agentList()

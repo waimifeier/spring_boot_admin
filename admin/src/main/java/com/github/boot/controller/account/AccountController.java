@@ -45,7 +45,7 @@ public class AccountController {
      * @param params
      * @return
      */
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public JSONReturn login(@RequestBody @Validated UserLoginParams params){
         return JSONReturn.buildSuccess(accountService.login(params));
     }
@@ -55,7 +55,7 @@ public class AccountController {
      * 2.退出
      * @return
      */
-    @RequestMapping("/logout")
+    @PostMapping("/logout")
     public JSONReturn logout(){
         return JSONReturn.buildSuccessEmptyBody();
     }
@@ -66,7 +66,7 @@ public class AccountController {
      * @param params
      * @return
      */
-    @RequestMapping("/modify_password")
+    @PostMapping("/modify_password")
     public JSONReturn modifyPassword(@LoginUser SysUser sysUser, @RequestBody @Validated ModifyUserPasswordParams params){
         accountService.modify(sysUser,params);
         return JSONReturn.buildSuccessEmptyBody();
@@ -79,7 +79,7 @@ public class AccountController {
      * @param params
      * @return
      */
-    @RequestMapping("/modify_photo")
+    @PostMapping("/modify_photo")
     public JSONReturn modifyPhoto(@LoginUser SysUser sysUser, @RequestBody HashMap<String,Object> params){
         accountService.modifyPhoto(sysUser,params);
         return JSONReturn.buildSuccessEmptyBody();
@@ -92,7 +92,7 @@ public class AccountController {
      * @param id
      * @return
      */
-    @RequestMapping("/resource_info/{id:\\d+}")
+    @PostMapping("/resource_info/{id:\\d+}")
     public JSONReturn resourceInfo(@LoginUser SysUser sysUser, @PathVariable Long id){
         sysUser.setId(id);
         return JSONReturn.buildSuccess( accountService.resourceInfo(sysUser));
