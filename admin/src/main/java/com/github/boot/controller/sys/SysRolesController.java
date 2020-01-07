@@ -6,10 +6,7 @@ import com.github.boot.beans.request.sys.EditorRolesParams;
 import com.github.boot.service.sys.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -30,7 +27,7 @@ public class SysRolesController {
      * @param params
      * @return
      */
-    @RequestMapping("/list")
+    @PostMapping("/list")
     public JSONReturn rolesList(@RequestBody HashMap<String,Object> params) {
         return JSONReturn.buildSuccess(roleService.getRoleList(params));
     }
@@ -40,7 +37,7 @@ public class SysRolesController {
      * @param id
      * @return
      */
-    @RequestMapping("/remove/{id:\\d+}")
+    @PostMapping("/remove/{id:\\d+}")
     public JSONReturn removeRolesById(@PathVariable("id") Long id) {
         roleService.removeRolesById(id);
         return JSONReturn.buildSuccessEmptyBody();
@@ -52,7 +49,7 @@ public class SysRolesController {
      * @param rolesParams
      * @return
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     public JSONReturn saveRoles(@RequestBody @Validated EditorRolesParams rolesParams){
         roleService.saveRoles(rolesParams);
         return JSONReturn.buildSuccessEmptyBody();
@@ -63,7 +60,7 @@ public class SysRolesController {
      * @param rolesParams
      * @return
      */
-    @RequestMapping("/modify")
+    @PostMapping("/modify")
     public JSONReturn modifyRoles(@RequestBody @Validated EditorRolesParams rolesParams) {
         roleService.modifyRoles(rolesParams);
         return JSONReturn.buildSuccessEmptyBody();
@@ -75,7 +72,7 @@ public class SysRolesController {
      * @param id
      * @return
      */
-    @RequestMapping("/info/{id:\\d+}")
+    @PostMapping("/info/{id:\\d+}")
     @SysLog("获取角色详情")
     public JSONReturn roleInfo(@PathVariable Long id){
         return JSONReturn.buildSuccess(roleService.roleInfo(id));
@@ -85,7 +82,7 @@ public class SysRolesController {
      * 6. 获取菜单列表
      * @return
      */
-    @RequestMapping("/menuList")
+    @PostMapping("/menuList")
     public JSONReturn  menuList(){
         return JSONReturn.buildSuccess(roleService.menuList());
     }

@@ -19,17 +19,20 @@ import com.github.boot.service.sys.SysRolesMenuService;
 import com.github.boot.service.sys.SysUserRolesService;
 import com.github.boot.service.sys.SysUserService;
 import com.github.boot.enums.sys.EnumSysUser;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl implements AccountService ,UserDetailsService {
 
     @Autowired
     private SysUserService sysUserService;
@@ -42,6 +45,17 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private SysMenuService sysMenuService;
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        if(StringUtils.isNotEmpty(username)){
+            SysUser dbUser = findSysUserByAccountOrPhone(username);  // 允许"账号" 或 "手机号" 登录
+            if(ObjectUtil.isNull(dbUser)) return null;
+
+        }
+        return null;
+    }
 
     @Override
     public Object login(UserLoginParams params) {
@@ -71,7 +85,7 @@ public class AccountServiceImpl implements AccountService {
     //校验登录用户
     private SysUser validatorLoginUser(UserLoginParams params) {
 
-        SysUser dbUser = findSysUserByAccountOrPhone(params);
+        SysUser dbUser = findSysUserByAccountOrPhone(params.getUserName());
 
         if (ObjectUtil.isNull(dbUser)) throw new PlantException("登录账号不存在~");
         if (dbUser.getState().equals(EnumSysUser.State.deleted.getKey())) throw new PlantException("您的账号已被删除,禁止登录！");
@@ -87,13 +101,13 @@ public class AccountServiceImpl implements AccountService {
         return dbUser;
     }
 
-    private SysUser findSysUserByAccountOrPhone(UserLoginParams params) {
+    private SysUser findSysUserByAccountOrPhone(String userName) {
         //1 用账号去查找用户
-        SysUser account = sysUserService.getOne(new QueryWrapper<SysUser>().eq("account", params.getUserName()));
+        SysUser account = sysUserService.getOne(new QueryWrapper<SysUser>().eq("account", userName));
 
         //2 如果账号不存在，用手机号查找用户
         if (ObjectUtil.isNull(account)) {
-            account = sysUserService.getOne(new QueryWrapper<SysUser>().eq("phone", params.getUserName()));
+            account = sysUserService.getOne(new QueryWrapper<SysUser>().eq("phone", userName));
         }
         return account;
     }
@@ -159,5 +173,6 @@ public class AccountServiceImpl implements AccountService {
             }
         });
     }
+
 
 }

@@ -11,11 +11,12 @@
         <result column="role_remarks" property="roleRemarks" />
         <result column="deleted" property="deleted" />
         <result column="check_node" property="checkNode" />
+        <result column="role_code" property="roleCode" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, create_time, create_user, role_name, role_remarks, deleted,check_node
+        id, create_time, create_user, role_name,role_code role_remarks, deleted,check_node
     </sql>
 
 </mapper>

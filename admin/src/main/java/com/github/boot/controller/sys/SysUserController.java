@@ -9,11 +9,9 @@ import com.github.boot.model.sys.SysUser;
 import com.github.boot.service.sys.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 
 
@@ -26,14 +24,14 @@ import java.util.HashMap;
 public class SysUserController {
 
 
-    @Autowired
+    @Resource
     private UserService userService;
 
     /**
      * 0 左侧标记
      * @return
      */
-    @RequestMapping("/badge")
+    @PostMapping("/badge")
     public JSONReturn badge(){
         return JSONReturn.buildSuccess(userService.badge());
     }
@@ -44,7 +42,7 @@ public class SysUserController {
      * @param params
      * @return
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     @SysLog("保存用户")
     public JSONReturn saveUser(@LoginUser SysUser sysUser , @RequestBody @Validated SysUserParams params) {
         userService.saveUser(sysUser,params);
@@ -57,7 +55,7 @@ public class SysUserController {
      * @param params
      * @return
      */
-    @RequestMapping("/modify")
+    @PostMapping("/modify")
     @SysLog("修改用户")
     public JSONReturn modifyUser(@LoginUser SysUser sysUser , @RequestBody @Validated SysUserParams params) {
         userService.modifyUser(sysUser,params);
@@ -69,7 +67,7 @@ public class SysUserController {
      * @param params
      * @return
      */
-    @RequestMapping("/list")
+    @PostMapping("/list")
     @SysLog("获取用户列表")
     public JSONReturn userList( @RequestBody HashMap<String,Object> params) {
 
@@ -81,7 +79,7 @@ public class SysUserController {
      * @param id
      * @return
      */
-    @RequestMapping("/disabled/{userId:\\d+}")
+    @PostMapping("/disabled/{userId:\\d+}")
     @SysLog("禁用启用用户")
     public JSONReturn disabledUser(@PathVariable("userId") Long id) {
         userService.disabledUser(id);
@@ -93,7 +91,7 @@ public class SysUserController {
      * @param id
      * @return
      */
-    @RequestMapping("/remove/{userId:\\d+}")
+    @PostMapping("/remove/{userId:\\d+}")
     @SysLog("删除用户")
     public JSONReturn removeUser(@PathVariable("userId") Long id) {
         userService.removeUser(id);
@@ -105,7 +103,7 @@ public class SysUserController {
      * @param params
      * @return
      */
-    @RequestMapping("/role_mapping")
+    @PostMapping("/role_mapping")
     @SysLog("分配角色")
     public JSONReturn roleMapping(@RequestBody @Validated RoleUserMappingParams params) {
         userService.roleMapping(params);
@@ -117,7 +115,7 @@ public class SysUserController {
      * 7 获取角色列表
      * @return
      */
-    @RequestMapping("/roleList")
+    @PostMapping("/roleList")
     public JSONReturn roleList() {
         return JSONReturn.buildSuccess(userService.roleList());
     }
@@ -127,7 +125,7 @@ public class SysUserController {
      * 7 获取角色列表
      * @return
      */
-    @RequestMapping("/department")
+    @PostMapping("/department")
     public JSONReturn department() {
         return JSONReturn.buildSuccess(userService.department());
     }

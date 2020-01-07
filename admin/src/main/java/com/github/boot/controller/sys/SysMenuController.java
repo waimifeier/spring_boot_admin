@@ -6,10 +6,9 @@ import com.github.boot.model.sys.SysMenu;
 import com.github.boot.service.sys.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -20,14 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys_menu")
 public class SysMenuController {
 
-    @Autowired
+    @Resource
     private MenuService menuService;
 
     /**
      *  1. 查看列表
      * @return
      */
-    @RequestMapping("/list")
+    @PostMapping("/list")
     public JSONReturn menuList() {
         return JSONReturn.buildSuccess(menuService.selectMenuList());
     }
@@ -37,7 +36,7 @@ public class SysMenuController {
      * @param id
      * @return
      */
-    @RequestMapping("/remove/{id:\\d+}")
+    @PostMapping("/remove/{id:\\d+}")
     public JSONReturn removeMenu(@PathVariable("id") Long id) {
         menuService.removeMenu(id);
         return JSONReturn.buildSuccessEmptyBody();
@@ -48,7 +47,7 @@ public class SysMenuController {
      * @param menu
      * @return
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     public JSONReturn saveMenu(@RequestBody @Validated SysMenuParams menu) {
         menuService.saveMenu(menu);
         return JSONReturn.buildSuccessEmptyBody();
@@ -59,7 +58,7 @@ public class SysMenuController {
      * @param menu
      * @return
      */
-    @RequestMapping("/modify")
+    @PostMapping("/modify")
     public JSONReturn modifyMenu(@RequestBody @Validated SysMenuParams menu) {
         menuService.modifyMenu(menu);
         return JSONReturn.buildSuccessEmptyBody();
@@ -69,7 +68,7 @@ public class SysMenuController {
      * 5.根据id获取 所有菜单节点
      * @return
      */
-    @RequestMapping("/menu_node")
+    @PostMapping("/menu_node")
     public JSONReturn menuNodeChildById(@RequestBody SysMenu menu) {
         return JSONReturn.buildSuccess(menuService.menuNodeChild(menu.getMenuType()));
     }
@@ -79,7 +78,7 @@ public class SysMenuController {
      * 6.查看详情
      * @return
      */
-    @RequestMapping("/detail/{id:\\d+}")
+    @PostMapping("/detail/{id:\\d+}")
     public JSONReturn menuDetail(@PathVariable Long id) {
         return JSONReturn.buildSuccess(menuService.menuDetail(id));
     }

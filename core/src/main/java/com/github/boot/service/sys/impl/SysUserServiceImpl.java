@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  * @since 2019-07-24
  */
 @Service
-public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService{
 
     @Resource
     private SysDepartmentService sysDepartmentService;
