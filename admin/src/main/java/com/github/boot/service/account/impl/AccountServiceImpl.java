@@ -20,6 +20,7 @@ import com.github.boot.service.sys.SysRolesMenuService;
 import com.github.boot.service.sys.SysUserRolesService;
 import com.github.boot.service.sys.SysUserService;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -60,6 +61,7 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
                     .roles("admin")   // 角色
                     .authorities("pa")  // 权限
                     .build();
+            // AuthorityUtils.commaSeparatedStringToAuthorityList("user:list,user:delete");
         }
         return null;
     }
