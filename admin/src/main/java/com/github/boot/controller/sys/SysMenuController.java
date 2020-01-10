@@ -43,7 +43,7 @@ public class SysMenuController {
     }
 
     /**
-     * 3. 保存菜单`-
+     * 3. 保存菜单
      * @param menu
      * @return
      */
