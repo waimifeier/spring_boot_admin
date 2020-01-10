@@ -1,6 +1,6 @@
 package com.github.boot.configure.security;
 
-import com.information.service.AccountService;
+import com.github.boot.service.account.AccountService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;

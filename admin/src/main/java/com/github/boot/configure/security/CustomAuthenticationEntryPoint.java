@@ -2,7 +2,7 @@ package com.github.boot.configure.security;
 
 import cn.hutool.http.HttpStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.information.beans.JSONReturn;
+import com.github.boot.beans.common.JSONReturn;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

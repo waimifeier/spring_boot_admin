@@ -2,7 +2,7 @@ package com.github.boot.configure.security;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.information.beans.JSONReturn;
+import com.github.boot.beans.common.JSONReturn;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
