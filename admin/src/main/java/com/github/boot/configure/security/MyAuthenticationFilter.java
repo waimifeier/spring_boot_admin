@@ -3,7 +3,6 @@ package com.github.boot.configure.security;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import sun.security.pkcs11.wrapper.Constants;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
