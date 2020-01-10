@@ -65,7 +65,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()  // 不写的话，不提供表单登录*/
             .and()
                 .authorizeRequests()
-                .antMatchers("/test2").hasAnyAuthority("test2")
                 .anyRequest().authenticated()
             .and()
                 .logout()
@@ -106,6 +105,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
+                "/",
                 "/info",
                  "/error",
                  "/**/*.css",

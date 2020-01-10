@@ -25,7 +25,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     @Override
     protected String obtainUsername(HttpServletRequest request) {
-        String username = this.getBodyParams(request).get("userName");
+        String username = this.getBodyParams(request).get(SPRING_SECURITY_FORM_USERNAME_KEY);
         if(!StringUtils.isEmpty(username)){
             return username;
         }

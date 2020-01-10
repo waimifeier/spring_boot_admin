@@ -63,7 +63,7 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
                     .build();
             // AuthorityUtils.commaSeparatedStringToAuthorityList("user:list,user:delete");
         }
-        return null;
+        throw new UsernameNotFoundException("用户名不存在");
     }
 
     @Override
