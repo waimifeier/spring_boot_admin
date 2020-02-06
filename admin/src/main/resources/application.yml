@@ -6,6 +6,9 @@ server:
 
 # 监控信息
 management:
+  endpoint:
+    health:
+      show-details: always
   endpoints:
     web:
       base-path: /
