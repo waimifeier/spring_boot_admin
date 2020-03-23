@@ -27,6 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .maxAge(3_600);
     }
 
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("/health");

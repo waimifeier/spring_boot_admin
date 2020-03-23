@@ -1,6 +1,6 @@
 # 服务器端口
 server:
-  port: 8888
+  port: 8088
   servlet:
     context-path: /    # 基础路径
 
@@ -37,3 +37,31 @@ spring:
     active: dev
 
 
+#decorator:
+#  datasource:
+#    p6spy:
+#      enable-logging: true
+#      multiline: true
+#      #  %(effectiveSql)带占位符带sql, %(sql) 带参数的sql .
+#      log-format: 'executionTime:%(executionTime) ms \t\n %(sql)'
+#      tracing:
+#        include-parameter-values: false
+
+decorator:
+  datasource:
+    datasource-proxy:
+      multiline: true
+      json-format: false
+      count-query: false
+      # 查询
+      query:
+        enable-logging: true
+        log-level: warn
+        logger-name: query.log
+
+      # 慢查询
+      slow-query:
+        enable-logging: true
+        log-level: warn
+        threshold: 300
+        logger-name: slow-query.log

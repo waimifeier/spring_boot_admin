@@ -4,7 +4,6 @@ import com.github.boot.beans.common.JSONReturn;
 import com.github.boot.beans.request.sys.SysMenuParams;
 import com.github.boot.model.sys.SysMenu;
 import com.github.boot.service.sys.MenuService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +25,7 @@ public class SysMenuController {
      *  1. 查看列表
      * @return
      */
-    @PostMapping("/list")
+    @RequestMapping("/list")
     public JSONReturn menuList() {
         return JSONReturn.buildSuccess(menuService.selectMenuList());
     }

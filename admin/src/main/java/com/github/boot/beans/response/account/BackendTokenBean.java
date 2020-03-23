@@ -1,10 +1,6 @@
 package com.github.boot.beans.response.account;
 
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsChecker;
-
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +9,7 @@ import java.util.List;
  * 管理后端 token 数据封装
  */
 @Data
-public class BackendTokenBean  implements UserDetails{
+public class BackendTokenBean  /*implements UserDetails*/{
 
     private Long id;          // sysUser 用户id
     private String account;   // 登录账号
@@ -26,7 +22,7 @@ public class BackendTokenBean  implements UserDetails{
     private List<String> roles;     // 角色
     private List<String> authCode;  // 权限码
 
-    @Override
+   /* @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
@@ -59,5 +55,5 @@ public class BackendTokenBean  implements UserDetails{
     @Override
     public boolean isEnabled() {
         return false;
-    }
+    }*/
 }

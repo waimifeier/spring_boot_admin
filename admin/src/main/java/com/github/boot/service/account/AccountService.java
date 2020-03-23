@@ -4,11 +4,10 @@ package com.github.boot.service.account;
 import com.github.boot.beans.request.account.ModifyUserPasswordParams;
 import com.github.boot.beans.request.account.UserLoginParams;
 import com.github.boot.model.sys.SysUser;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.HashMap;
 
-public interface AccountService extends UserDetailsService {
+public interface AccountService/* extends UserDetailsService */{
 
     Object login(UserLoginParams params);
 

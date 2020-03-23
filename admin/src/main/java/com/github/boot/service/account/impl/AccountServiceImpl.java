@@ -20,11 +20,6 @@ import com.github.boot.service.sys.SysRolesMenuService;
 import com.github.boot.service.sys.SysUserRolesService;
 import com.github.boot.service.sys.SysUserService;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +29,8 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
-public class AccountServiceImpl implements AccountService, UserDetailsService {
+
+public class AccountServiceImpl implements AccountService/*, UserDetailsService*/ {
 
     @Resource
     private SysUserService sysUserService;
@@ -49,7 +45,7 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
     private SysMenuService sysMenuService;
 
 
-    @Override
+  /*  @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         if (StringUtils.isNotEmpty(username)) {
@@ -64,7 +60,7 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
             // AuthorityUtils.commaSeparatedStringToAuthorityList("user:list,user:delete");
         }
         throw new UsernameNotFoundException("用户名不存在");
-    }
+    }*/
 
     @Override
     public Object login(UserLoginParams params) {
